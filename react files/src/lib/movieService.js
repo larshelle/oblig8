@@ -32,16 +32,14 @@ export const getActorName = async (actorName) => {
   const data = await client.fetch(`*[_type == "movie"]{${movieFields}}`)
   const actorslug = await client.fetch(
     `*[_type == "actor" && slug.current == $actorName]{${actorFields}}`,
-    {
-      actorName,
-    }
+    {actorName,}
   )
 
   const newData = [...data, ...actorslug]
   return newData
 }
 
-export const getMovieTitle = async (movieName) => {
+export const getMovieActors = async (actorName) => {
   const data = await client.fetch(
     `*[_type=="movie" && slug.current == $movieTitle]{${movieFields}}`,
     { actorName }
